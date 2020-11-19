@@ -3,3 +3,4 @@
 3 - FileWriter and BufferedWriter
 4 - Handling folders with File class
 5 - Info about the file's path
+6 - Exercise
