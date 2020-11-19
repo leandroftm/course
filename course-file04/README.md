@@ -1,0 +1,1 @@
+Handling folders with File class
