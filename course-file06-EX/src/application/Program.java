@@ -28,33 +28,40 @@ public class Program {
 
 		String folderPath = path.getParent();
 		boolean file = new File(folderPath + "\\out").mkdir();
-		folderPath += "\\out\\sumary.csv";
 
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			String line = br.readLine();
+		if (!file) {
+			
+			System.out.println("Error on the file path.");
 
-			while (line != null) {
-				String[] products = line.split(",");
-				list.add(new Product(products[0], Double.parseDouble(products[1]), Integer.parseInt(products[2])));
-				line = br.readLine();
-			}
+		} else {
+			folderPath += "\\out\\sumary.csv";
 
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(folderPath))) {
-				System.out.println("Products list: ");
-				for (Product product : list) {
-					bw.write(product.totalPrice());
-					System.out.println(product.totalPrice());
-					bw.newLine();
+			try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+				String line = br.readLine();
+
+				while (line != null) {
+					String[] products = line.split(",");
+					list.add(new Product(products[0], Double.parseDouble(products[1]), Integer.parseInt(products[2])));
+					line = br.readLine();
 				}
-				System.out.println();
-				System.out.println("File created at: " + folderPath);
+
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(folderPath))) {
+					System.out.println("Products list: ");
+					for (Product product : list) {
+						bw.write(product.totalPrice());
+						System.out.println(product.totalPrice());
+						bw.newLine();
+					}
+					System.out.println();
+					System.out.println("File created at: " + folderPath);
+
+				} catch (IOException e) {
+					System.out.println("Error while writing file: " + e.getMessage());
+				}
 
 			} catch (IOException e) {
-				System.out.println("Error while writing file: " + e.getMessage());
+				System.out.println("Error while reading file: " + e.getMessage());
 			}
-
-		} catch (IOException e) {
-			System.out.println("Error while reading file: " + e.getMessage());
 		}
 
 		sc.close();
