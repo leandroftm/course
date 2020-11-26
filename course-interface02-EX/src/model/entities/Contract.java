@@ -10,7 +10,7 @@ public class Contract {
 	private Date date;
 	private Double totalValue;
 	
-	private List<Installment> installment = new ArrayList<>();
+	private List<Installment> installments = new ArrayList<>();
 	
 	public Contract() {
 		
@@ -47,11 +47,15 @@ public class Contract {
 	}
 
 	public List<Installment> getInstallment() {
-		return installment;
+		return installments;
 	}
 
-	public void setInstallment(Installment installment) {
-		this.installment.add(installment);
+	public void addInstallment(Installment installment) {
+		installments.add(installment);
+	}
+
+	public void removeInstallment(Installment installment) {
+		installments.remove(installment);
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class Contract {
 		
 		String str = "";
 		
-		for(Installment item : installment) {
+		for(Installment item : installments) {
 			str += item.toString() + "\n";
 		}
 		return "Contract [number=" + number + ", date=" + date + ", totalValue=" + totalValue + ", installment="

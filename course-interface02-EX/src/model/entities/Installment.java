@@ -1,5 +1,6 @@
 package model.entities;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Installment {
@@ -34,7 +35,20 @@ public class Installment {
 
 	@Override
 	public String toString() {
-		return "Installment [dueDate=" + dueDate + ", amount=" + amount + "]";
+		return convertDate(getDueDate()) + " - " + getAmount();
+	}
+	
+	private static String convertDate(Date date) {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		int day = calendar.get(Calendar.DATE);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int year = calendar.get(Calendar.YEAR);
+
+		return day + "/" + month + "/" + year;
+
 	}
 	
 }
